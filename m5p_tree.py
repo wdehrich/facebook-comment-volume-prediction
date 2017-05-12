@@ -39,6 +39,24 @@ print(y)
 print(y_1)
 print(y_2)
 
+order_actual = y.argsort()
+order_predicted1 = y_1.argsort()
+order_predicted2 = y_2.argsort()
+
+topten_actual = order_actual[90:]
+topten_predicted1 = order_predicted1[90:]
+topten_predicted2 = order_predicted2[90:]
+print(topten_actual)
+
+commonalities_predited1 = set(topten_predicted1) - (set(topten_predicted1) - set(topten_actual))
+hit_at_ten_predicted1 = len(list(commonalities_predited1))
+
+commonalities_predited2 = set(topten_predicted2) - (set(topten_predicted2) - set(topten_actual))
+hit_at_ten_predicted2 = len(list(commonalities_predited2))
+
+print 'hit_at_ten_predicted1 =', hit_at_ten_predicted1
+print 'hit_at_ten_predicted2 =', hit_at_ten_predicted2
+
 '''
 # Plot the results
 plt.figure()
