@@ -24,9 +24,11 @@ regr_2 = DecisionTreeRegressor(max_depth=5)
 regr_1.fit(X, y)
 regr_2.fit(X, y)
 
-url_test = "https://raw.githubusercontent.com/wdehrich/facebook-comment-volume-prediction/master/Dataset/Dataset/Testing/TestSet/Test_Case_1.csv"
+url_test = list()
+url_test.append("https://raw.githubusercontent.com/wdehrich/facebook-comment-volume-prediction/master/Dataset/Dataset/Testing/TestSet/Test_Case_1.csv")
+
 # download the file
-raw_data = urllib.urlopen(url_test)
+raw_data = urllib.urlopen(url_test[0])
 # load the CSV file as a numpy matrix
 data_set_test = np.loadtxt(raw_data, delimiter=",")
 
