@@ -35,22 +35,7 @@ X_test = dataset[:, 0:52]
 y = dataset[:, 53]
 y_1 = regr_1.predict(X_test)
 y_2 = regr_2.predict(X_test)
-'''
-order_actual = y.argsort()
-order_predicted1 = y_1.argsort()
-order_predicted2 = y_2.argsort()
 
-topten_actual = order_actual[90:]
-topten_predicted1 = order_predicted1[90:]
-topten_predicted2 = order_predicted2[90:]
-print(topten_actual)
-
-commonalities_predicted1 = np.intersect1d(topten_predicted1, topten_actual)
-hit_at_ten_predicted1 = len(list(commonalities_predicted1))
-
-commonalities_predicted2 = np.intersect1d(topten_predicted2, topten_actual)
-hit_at_ten_predicted2 = len(list(commonalities_predicted2))
-'''
 hit_at_ten_predicted1 = ut.get_hits_at_10(y, y_1)
 hit_at_ten_predicted2 = ut.get_hits_at_10(y, y_2)
 
