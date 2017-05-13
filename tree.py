@@ -5,6 +5,7 @@
 import numpy as np
 import urllib
 from sklearn.tree import DecisionTreeRegressor
+import utils as ut
 import matplotlib.pyplot as plt
 
 url = "https://raw.githubusercontent.com/wdehrich/facebook-comment-volume-prediction/master/Dataset/Dataset/Training/Features_Variant_1.csv"
@@ -34,7 +35,7 @@ X_test = dataset[:, 0:52]
 y = dataset[:, 53]
 y_1 = regr_1.predict(X_test)
 y_2 = regr_2.predict(X_test)
-
+'''
 order_actual = y.argsort()
 order_predicted1 = y_1.argsort()
 order_predicted2 = y_2.argsort()
@@ -49,6 +50,9 @@ hit_at_ten_predicted1 = len(list(commonalities_predicted1))
 
 commonalities_predicted2 = np.intersect1d(topten_predicted2, topten_actual)
 hit_at_ten_predicted2 = len(list(commonalities_predicted2))
+'''
+hit_at_ten_predicted1 = ut.get_hits_at_10(y, y_1)
+hit_at_ten_predicted2 = ut.get_hits_at_10(y, y_2)
 
 print 'hit_at_ten_predicted1 =', hit_at_ten_predicted1
 print 'hit_at_ten_predicted2 =', hit_at_ten_predicted2
