@@ -50,5 +50,5 @@ for i in range(len(url_test)):
     y_predicted = regressor.predict(X_test)
 
     # Get Hits@10 measurement
-    hits_at_ten_predicted = ut.get_hits_at_10(y, y_predicted)
+    hits_at_ten_predicted = ut.get_hits_at_ten(y, y_predicted)
     print 'hit_at_ten_predicted =', hits_at_ten_predicted
