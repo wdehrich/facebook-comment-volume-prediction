@@ -12,7 +12,6 @@ url = "https://raw.githubusercontent.com/wdehrich/facebook-comment-volume-predic
 raw_data = urllib.urlopen(url)
 # load the CSV file as a numpy matrix
 dataset = np.loadtxt(raw_data, delimiter=",", skiprows=1)
-print(dataset.shape)
 # separate the data from the target attributes
 X = dataset[:, 0:52]
 y = dataset[:, 53]
@@ -35,10 +34,6 @@ X_test = dataset[:, 0:52]
 y = dataset[:, 53]
 y_1 = regr_1.predict(X_test)
 y_2 = regr_2.predict(X_test)
-
-print(y)
-print(y_1)
-print(y_2)
 
 order_actual = y.argsort()
 order_predicted1 = y_1.argsort()
