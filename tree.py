@@ -11,7 +11,6 @@ import matplotlib.pyplot as plt
 
 # training data URL
 url_train = "https://raw.githubusercontent.com/wdehrich/facebook-comment-volume-prediction/master/Dataset/Dataset/Training/Features_Variant_1.csv"
-
 # testing data URLs
 url_test = list()
 url_test.append("https://raw.githubusercontent.com/wdehrich/facebook-comment-volume-prediction/master/Dataset/Dataset/Testing/TestSet/Test_Case_1.csv")
@@ -37,7 +36,6 @@ y = data_set_train[:, 53]
 regressor = DecisionTreeRegressor(max_depth=5)
 regressor.fit(X, y)
 
-hits_at_ten_total = 0
 num_url_test = len(url_test)
 hits_at_ten = list()
 
