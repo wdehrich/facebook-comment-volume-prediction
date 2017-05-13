@@ -38,8 +38,10 @@ regressor = DecisionTreeRegressor(max_depth=5)
 regressor.fit(X, y)
 
 hits_at_ten_total = 0
+num_url_test = len(url_test)
+hits_at_ten = list()
 
-for i in range(len(url_test)):
+for i in range(num_url_test):
     current_url_test = url_test[i]
     # download the testing data file
     raw_data = urllib.urlopen(current_url_test)
@@ -52,6 +54,9 @@ for i in range(len(url_test)):
     y_predicted = regressor.predict(X_test)
 
     # Get Hits@10 measurement
-    hits_at_ten = ut.get_hits_at_ten(y, y_predicted)
-    print 'hit_at_ten =', hits_at_ten
-    hits_at_ten_total += hits_at_ten
+    hits_at_ten_current = ut.get_hits_at_ten(y, y_predicted)
+    hits_at_ten.append(hits_at_ten_current)
+
+hits_at_ten_average = float(sum(hits_at_ten)/float(num_url_test))
+print 'hits_at_ten =', hits_at_ten
+print 'hit_at_ten_average =', hits_at_ten_average
