@@ -49,24 +49,11 @@ topten_predicted1 = order_predicted1[90:]
 topten_predicted2 = order_predicted2[90:]
 print(topten_actual)
 
-commonalities_predited1 = set(topten_predicted1) - (set(topten_predicted1) - set(topten_actual))
-hit_at_ten_predicted1 = len(list(commonalities_predited1))
+commonalities_predicted1 = np.intersect1d(topten_predicted1, topten_actual)
+hit_at_ten_predicted1 = len(list(commonalities_predicted1))
 
-commonalities_predited2 = set(topten_predicted2) - (set(topten_predicted2) - set(topten_actual))
-hit_at_ten_predicted2 = len(list(commonalities_predited2))
+commonalities_predicted2 = np.intersect1d(topten_predicted2, topten_actual)
+hit_at_ten_predicted2 = len(list(commonalities_predicted2))
 
 print 'hit_at_ten_predicted1 =', hit_at_ten_predicted1
 print 'hit_at_ten_predicted2 =', hit_at_ten_predicted2
-
-'''
-# Plot the results
-plt.figure()
-plt.scatter(X, y, c="darkorange", label="data")
-plt.plot(X_test, y_1, color="cornflowerblue", label="max_depth=2", linewidth=2)
-plt.plot(X_test, y_2, color="yellowgreen", label="max_depth=5", linewidth=2)
-plt.xlabel("data")
-plt.ylabel("target")
-plt.title("Decision Tree Regression")
-plt.legend()
-plt.show()
-'''
