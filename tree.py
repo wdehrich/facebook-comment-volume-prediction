@@ -6,17 +6,17 @@ import numpy as np
 import urllib
 from sklearn.tree import DecisionTreeRegressor
 import utils as ut
-import matplotlib.pyplot as plt
+# import matplotlib.pyplot as plt
 
 # import training data
 url_train = "https://raw.githubusercontent.com/wdehrich/facebook-comment-volume-prediction/master/Dataset/Dataset/Training/Features_Variant_1.csv"
 # download the file
 raw_data = urllib.urlopen(url_train)
 # load the CSV file as a numpy matrix
-dataset_train = np.loadtxt(raw_data, delimiter=",", skiprows=1)
+data_set_train = np.loadtxt(raw_data, delimiter=",", skiprows=1)
 # separate the data from the target attributes
-X = dataset_train[:, 0:52]
-y = dataset_train[:, 53]
+X = data_set_train[:, 0:52]
+y = data_set_train[:, 53]
 
 # Fit regression model
 regr_1 = DecisionTreeRegressor(max_depth=2)
@@ -28,11 +28,11 @@ url = "https://raw.githubusercontent.com/wdehrich/facebook-comment-volume-predic
 # download the file
 raw_data = urllib.urlopen(url)
 # load the CSV file as a numpy matrix
-dataset = np.loadtxt(raw_data, delimiter=",")
+data_set_test = np.loadtxt(raw_data, delimiter=",")
 
 # Predict
-X_test = dataset[:, 0:52]
-y = dataset[:, 53]
+X_test = data_set_test[:, 0:52]
+y = data_set_test[:, 53]
 y_1 = regr_1.predict(X_test)
 y_2 = regr_2.predict(X_test)
 
