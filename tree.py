@@ -19,9 +19,7 @@ X = data_set_train[:, 0:52]
 y = data_set_train[:, 53]
 
 # Fit regression model
-regr_1 = DecisionTreeRegressor(max_depth=2)
 regr_2 = DecisionTreeRegressor(max_depth=5)
-regr_1.fit(X, y)
 regr_2.fit(X, y)
 
 url_test = list()
@@ -46,11 +44,7 @@ for i in range(len(url_test)):
     # Predict
     X_test = data_set_test[:, 0:52]
     y = data_set_test[:, 53]
-    y_1 = regr_1.predict(X_test)
     y_2 = regr_2.predict(X_test)
 
-    hit_at_ten_predicted1 = ut.get_hits_at_10(y, y_1)
     hit_at_ten_predicted2 = ut.get_hits_at_10(y, y_2)
-
-    print 'hit_at_ten_predicted1 =', hit_at_ten_predicted1
     print 'hit_at_ten_predicted2 =', hit_at_ten_predicted2
