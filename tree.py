@@ -7,7 +7,7 @@ import numpy as np
 import urllib
 from sklearn.tree import DecisionTreeRegressor
 import utils as ut
-# import matplotlib.pyplot as plt
+import matplotlib.pyplot as plt
 
 # training data URL
 url_train = "https://raw.githubusercontent.com/wdehrich/facebook-comment-volume-prediction/master/Dataset/Dataset/Training/Features_Variant_1.csv"
@@ -60,3 +60,16 @@ for i in range(num_url_test):
 hits_at_ten_average = float(sum(hits_at_ten)/float(num_url_test))
 print 'hits_at_ten =', hits_at_ten
 print 'hit_at_ten_average =', hits_at_ten_average
+
+x = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'Avg.']
+y_pos = np.arange(len(x))
+hits_at_ten.append(hits_at_ten_average)
+scores = np.copy(hits_at_ten)
+
+plt.bar(y_pos, scores, align='center', alpha=0.5)
+plt.xticks(y_pos, x)
+plt.ylabel('Score')
+plt.xlabel('Test')
+plt.title('Hits@10')
+
+plt.show()
