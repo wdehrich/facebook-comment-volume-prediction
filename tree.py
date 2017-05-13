@@ -26,9 +26,18 @@ regr_2.fit(X, y)
 
 url_test = list()
 url_test.append("https://raw.githubusercontent.com/wdehrich/facebook-comment-volume-prediction/master/Dataset/Dataset/Testing/TestSet/Test_Case_1.csv")
+url_test.append("https://raw.githubusercontent.com/wdehrich/facebook-comment-volume-prediction/master/Dataset/Dataset/Testing/TestSet/Test_Case_2.csv")
+url_test.append("https://raw.githubusercontent.com/wdehrich/facebook-comment-volume-prediction/master/Dataset/Dataset/Testing/TestSet/Test_Case_3.csv")
+url_test.append("https://raw.githubusercontent.com/wdehrich/facebook-comment-volume-prediction/master/Dataset/Dataset/Testing/TestSet/Test_Case_4.csv")
+url_test.append("https://raw.githubusercontent.com/wdehrich/facebook-comment-volume-prediction/master/Dataset/Dataset/Testing/TestSet/Test_Case_5.csv")
+url_test.append("https://raw.githubusercontent.com/wdehrich/facebook-comment-volume-prediction/master/Dataset/Dataset/Testing/TestSet/Test_Case_6.csv")
+url_test.append("https://raw.githubusercontent.com/wdehrich/facebook-comment-volume-prediction/master/Dataset/Dataset/Testing/TestSet/Test_Case_7.csv")
+url_test.append("https://raw.githubusercontent.com/wdehrich/facebook-comment-volume-prediction/master/Dataset/Dataset/Testing/TestSet/Test_Case_8.csv")
+url_test.append("https://raw.githubusercontent.com/wdehrich/facebook-comment-volume-prediction/master/Dataset/Dataset/Testing/TestSet/Test_Case_9.csv")
+url_test.append("https://raw.githubusercontent.com/wdehrich/facebook-comment-volume-prediction/master/Dataset/Dataset/Testing/TestSet/Test_Case_10.csv")
 
-for i in range(1):
-    current_url_test = url_test[0]
+for i in range(len(url_test)):
+    current_url_test = url_test[i]
     # download the file
     raw_data = urllib.urlopen(current_url_test)
     # load the CSV file as a numpy matrix
