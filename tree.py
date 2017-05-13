@@ -1,3 +1,4 @@
+# Resources:
 # http://scikit-learn.org/stable/auto_examples/tree/plot_tree_regression.html
 # http://machinelearningmastery.com/how-to-load-data-in-python-with-scikit-learn/
 # http://stackoverflow.com/questions/2864842/common-elements-comparison-between-2-lists
@@ -24,7 +25,7 @@ url_test.append("https://raw.githubusercontent.com/wdehrich/facebook-comment-vol
 url_test.append("https://raw.githubusercontent.com/wdehrich/facebook-comment-volume-prediction/master/Dataset/Dataset/Testing/TestSet/Test_Case_9.csv")
 url_test.append("https://raw.githubusercontent.com/wdehrich/facebook-comment-volume-prediction/master/Dataset/Dataset/Testing/TestSet/Test_Case_10.csv")
 
-# download the file
+# download training data file
 raw_data = urllib.urlopen(url_train)
 # load the CSV file as a numpy matrix
 data_set_train = np.loadtxt(raw_data, delimiter=",", skiprows=1)
@@ -38,7 +39,7 @@ regressor.fit(X, y)
 
 for i in range(len(url_test)):
     current_url_test = url_test[i]
-    # download the file
+    # download the testing data file
     raw_data = urllib.urlopen(current_url_test)
     # load the CSV file as a numpy matrix
     data_set_test = np.loadtxt(raw_data, delimiter=",")
@@ -48,5 +49,6 @@ for i in range(len(url_test)):
     y = data_set_test[:, 53]
     y_predicted = regressor.predict(X_test)
 
+    # Get Hits@10 measurement
     hits_at_ten_predicted = ut.get_hits_at_10(y, y_predicted)
     print 'hit_at_ten_predicted =', hits_at_ten_predicted
