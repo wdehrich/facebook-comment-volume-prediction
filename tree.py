@@ -37,6 +37,8 @@ y = data_set_train[:, 53]
 regressor = DecisionTreeRegressor(max_depth=5)
 regressor.fit(X, y)
 
+hits_at_ten_total = 0
+
 for i in range(len(url_test)):
     current_url_test = url_test[i]
     # download the testing data file
@@ -50,5 +52,6 @@ for i in range(len(url_test)):
     y_predicted = regressor.predict(X_test)
 
     # Get Hits@10 measurement
-    hits_at_ten_predicted = ut.get_hits_at_ten(y, y_predicted)
-    print 'hit_at_ten_predicted =', hits_at_ten_predicted
+    hits_at_ten = ut.get_hits_at_ten(y, y_predicted)
+    print 'hit_at_ten =', hits_at_ten
+    hits_at_ten_total += hits_at_ten
