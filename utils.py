@@ -1,4 +1,5 @@
 import numpy as np
+import csv
 from sklearn.metrics import mean_squared_error
 
 
@@ -24,6 +25,29 @@ def mse(target, predicted):
 	"""
 	return mean_squared_error(target, predicted)
 
+# read csv files
+def parse(filename, header = True):
+    '''
+    takes a filename and returns list of features(list) and its labels(list), assuming
+    labels are at the last column. If header is true (as default), it skips the header.
+    '''
+    # initialize variables
+    label = []
+    attr = [] 
+    csvfile = open(filename,'rb')
+    fileToRead = csv.reader(csvfile)
+    if header:
+    	headers = fileToRead.next()
+
+    # iterate through rows of actual data
+    for row in fileToRead:
+        attr.append(row)
+    for row in attr:
+    	label.append(row.pop())
+
+    return np.array(attr, dtype = np.float64), np.array(label, dtype = np.float64)
+
+# test the functions
 def tester():
 	y_true = [3, -0.5, 2, 7]
 	y_pred = [2.5, 0.0, 2, 8]
