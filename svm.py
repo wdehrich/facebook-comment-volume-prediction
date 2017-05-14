@@ -1,4 +1,4 @@
-from sklearn.naive_bayes import GaussianNB
+from sklearn import svm
 import numpy as np
 import urllib
 import utils as ut
@@ -26,7 +26,7 @@ data_set_train = np.loadtxt(raw_data, delimiter=",", skiprows=1)
 # separate the data from the target attributes
 X = data_set_train[:, 0:52]
 y = data_set_train[:, 53]
-clf = GaussianNB()
+clf = svm.SVR(kernel='linear')
 clf.fit(X,y)
 num_url_test = len(url_test)
 hits_at_ten = list()
