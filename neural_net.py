@@ -20,7 +20,7 @@ def mlp_train(x, y, k = 10):
 	scaler.fit(x)
 	classifier = MLPRegressor(alpha = 1e-4, hidden_layer_sizes = (150,5,), 
 		random_state = 12, max_iter = 500, activation = 'relu',
-		verbose = True, early_stopping = False, learning_rate_init = 0.001)
+		verbose = True, early_stopping = True, learning_rate_init = 0.001)
 	classifier.fit(scaler.transform(x), y)
 	return classifier, scaler
 
