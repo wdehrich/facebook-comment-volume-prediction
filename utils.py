@@ -1,6 +1,7 @@
 import numpy as np
 import csv
 from sklearn.metrics import mean_squared_error
+import matplotlib.pyplot as plt
 
 
 # requires an input array of at least size 10
@@ -24,6 +25,26 @@ def mse(target, predicted):
 		mse: the mean square error
 	"""
 	return mean_squared_error(target, predicted)
+
+# actual-predicted ratio plot
+def ratio(target, predicted, factor):
+    """
+    plot the actual vs predicted value, and compute the percentage within the factor
+    -inputs:
+        target: the actual class labels
+        predicted: prediction from the classifier given the attributes
+        factor: specify the number of within factor
+    -output:
+        a plot of predicted against target values, with ideal line
+        percentage of values within the factor 
+    """
+    plt.plot(target,predicted,'ro')
+    upper = max(max(target),max(predicted)) * 1.1
+    plt.plot([0, upper],[0, upper],'b-')
+    predicted[predicted == 0] = 1
+    r = target*1.0/predicted
+    print 'Within the factor of %d: ' % factor, len(r[(r <= factor) & (r >= 1/factor)])*1.0/len(r)
+    plt.show()
 
 # read csv files
 def parse(filename, header = True):
@@ -49,8 +70,8 @@ def parse(filename, header = True):
 
 # test the functions
 def tester():
-	y_true = [3, -0.5, 2, 7]
-	y_pred = [2.5, 0.0, 2, 8]
-	print mse(y_true, y_pred)
+	y_true = np.array([3.0, 1, 2, 7])
+	y_pred = np.array([4, 0.0, 2, 8])
+	ratio(y_true, y_pred)
 
 #tester()
