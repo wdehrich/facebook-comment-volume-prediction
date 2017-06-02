@@ -103,8 +103,8 @@ def run_get_hits_at_ten(url_train, url_test):
         data_set_test = np.loadtxt(raw_data, delimiter=",")
 
         # Predict
-        X_test = data_set_test[:, 0:52]
-        y = data_set_test[:, 53]
+        X_test = data_set_test[:, 0:(num_attributes - 1)]
+        y = data_set_test[:, num_attributes]
         y_predicted = regressor.predict(X_test)
 
         # Get Hits@10 measurement
