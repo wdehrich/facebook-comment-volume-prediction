@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 import urllib
 from sklearn.tree import DecisionTreeRegressor
 
+
 # requires an input array of at least size 10
 def get_hits_at_ten(actual, predicted):
     order_actual = np.argsort(actual)
