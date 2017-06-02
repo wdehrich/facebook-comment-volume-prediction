@@ -3,6 +3,7 @@
 # http://machinelearningmastery.com/how-to-load-data-in-python-with-scikit-learn/
 # http://stackoverflow.com/questions/2864842/common-elements-comparison-between-2-lists
 # https://pythonspot.com/en/matplotlib-bar-chart/
+# http://scikit-learn.org/stable/auto_examples/ensemble/plot_forest_importances.html
 
 import numpy as np
 import urllib
@@ -60,7 +61,12 @@ for i in range(num_url_test):
 hits_at_ten_average = float(sum(hits_at_ten)/float(num_url_test))
 print 'hits_at_ten =', hits_at_ten
 print 'hit_at_ten_average =', hits_at_ten_average
-print(regressor.feature_importances_)
+
+importances = regressor.feature_importances_
+print(importances)
+importances_indexes = np.argsort(importances)
+print(importances_indexes)
+print(np.argmax(importances))
 
 x = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'Avg.']
 y_pos = np.arange(len(x))
