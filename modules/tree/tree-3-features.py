@@ -33,6 +33,7 @@ raw_data = urllib.urlopen(url_train)
 # load the CSV file as a numpy matrix
 data_set_train = np.loadtxt(raw_data, delimiter=",", skiprows=1)
 # separate the data from the target attributes
+print(data_set_train)
 X = data_set_train[:, 0:2]
 y = data_set_train[:, 3]
 
