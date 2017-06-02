@@ -2,7 +2,8 @@ import numpy as np
 import csv
 from sklearn.metrics import mean_squared_error
 import matplotlib.pyplot as plt
-
+import urllib
+from sklearn.tree import DecisionTreeRegressor
 
 # requires an input array of at least size 10
 def get_hits_at_ten(actual, predicted):
@@ -75,3 +76,59 @@ def tester():
 	ratio(y_true, y_pred)
 
 #tester()
+
+def run_get_hits_at_ten(url_train, url_test):
+    # download training data file
+    raw_data = urllib.urlopen(url_train)
+    # load the CSV file as a numpy matrix
+    data_set_train = np.loadtxt(raw_data, delimiter=",", skiprows=1)
+    # separate the data from the target attributes
+    num_attributes = len(data_set_train[0]) - 1
+    print(num_attributes)
+    X = data_set_train[:, 0:(num_attributes - 1)]
+    y = data_set_train[:, num_attributes]
+
+    # Fit regression model
+    regressor = DecisionTreeRegressor(max_depth=5)
+    regressor.fit(X, y)
+
+    num_url_test = len(url_test)
+    hits_at_ten = list()
+
+    for i in range(num_url_test):
+        current_url_test = url_test[i]
+        # download the testing data file
+        raw_data = urllib.urlopen(current_url_test)
+        # load the CSV file as a numpy matrix
+        data_set_test = np.loadtxt(raw_data, delimiter=",")
+
+        # Predict
+        X_test = data_set_test[:, 0:52]
+        y = data_set_test[:, 53]
+        y_predicted = regressor.predict(X_test)
+
+        # Get Hits@10 measurement
+        hits_at_ten_current = get_hits_at_ten(y, y_predicted)
+        hits_at_ten.append(hits_at_ten_current)
+
+    hits_at_ten_average = float(sum(hits_at_ten) / float(num_url_test))
+    print 'hits_at_ten =', hits_at_ten
+    print 'hit_at_ten_average =', hits_at_ten_average
+
+    importances = regressor.feature_importances_
+    print(importances)
+    importances_indexes = np.argsort(importances)
+    print(importances_indexes)
+    print(np.argmax(importances))
+
+    x = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'Avg.']
+    y_pos = np.arange(len(x))
+    hits_at_ten.append(hits_at_ten_average)
+    scores = np.copy(hits_at_ten)
+
+    plt.bar(y_pos, scores, align='center', alpha=0.5)
+    plt.xticks(y_pos, x)
+    plt.ylabel('Score')
+    plt.xlabel('Test')
+    plt.title('Hits@10')
+    plt.show()

@@ -1,10 +1,3 @@
-# Resources:
-# http://scikit-learn.org/stable/auto_examples/tree/plot_tree_regression.html
-# http://machinelearningmastery.com/how-to-load-data-in-python-with-scikit-learn/
-# http://stackoverflow.com/questions/2864842/common-elements-comparison-between-2-lists
-# https://pythonspot.com/en/matplotlib-bar-chart/
-# http://scikit-learn.org/stable/auto_examples/ensemble/plot_forest_importances.html
-
 import utils as ut
 
 url_prefix = "https://raw.githubusercontent.com/wdehrich/facebook-comment-volume-prediction/master/Dataset/Dataset/"
