@@ -44,8 +44,9 @@ def ratio(target, predicted, factor):
     plt.plot([0, upper],[0, upper],'b-')
     predicted[predicted == 0] = 1
     r = target*1.0/predicted
-    print 'Within the factor of %d: ' % factor, len(r[(r <= factor) & (r >= 1/factor)])*1.0/len(r)
-    plt.show()
+    #print 'Within the factor of %d: ' % factor, len(r[(r <= factor) & (r >= 1/factor)])*1.0/len(r)
+    #plt.show()
+    return len(r[(r <= factor) & (r >= 1/factor)])*1.0/len(r)
 
 def run_get_hits_at_ten(url_train, url_test):
     # download training data file
@@ -123,7 +124,7 @@ def get_accuracy(data_set_train, data_sets_test):
 
     hits_at_ten = list()
     mean_square_error = list()
-    ratio = list()
+    ratios = list()
 
     for i in range(len(data_sets_test)):
         # Predict
@@ -140,13 +141,15 @@ def get_accuracy(data_set_train, data_sets_test):
         mean_square_error.append(mean_square_error_current)
 
         # Get ratio
-        ratio_current = ratio(y, y_predicted, 3)
-        #ratio.append(ratio_current)
+        ratio_current = ratio(y, y_predicted, 2)
+        ratios.append(ratio_current)
 
     hits_at_ten_average = float(sum(hits_at_ten) / float(len(data_sets_test)))
     mean_square_error_average = float(sum(mean_square_error)) / float(len(mean_square_error))
+    ratios_average = float(sum(ratios)) / float(len(ratios))
 
     print 'hits_at_ten =', hits_at_ten
     print 'hit_at_ten_average =', hits_at_ten_average
     print 'mean_square_error_average = ', mean_square_error_average
+    print 'ratios_average = ', ratios_average
     return
