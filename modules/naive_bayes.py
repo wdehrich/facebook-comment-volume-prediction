@@ -16,8 +16,9 @@ def get_hits_at_ten(actual, predicted):
 # url_train, url_test = ut.get_urls("features-1")
 # url_train, url_test = ut.get_urls("features-2")
 # url_train, url_test = ut.get_urls("features-3")
+
 data_set_train, data_sets_test = ut.get_data()
-columns = [30, 53]
+columns = [30,34,36, 53]
 data_set_train_selected, data_sets_test_selected = ut.select_data(data_set_train, data_sets_test, columns)
 data_set_train_selected[:, 0] = np.square(data_set_train_selected[:, 0])
 for i in range(len(data_sets_test_selected)):
@@ -29,8 +30,10 @@ for i in range(len(data_sets_test_selected)):
 # data_set_train = np.loadtxt(raw_data, delimiter=",", skiprows=1)
 # separate the data from the target attributes
 num_attributes = len(data_set_train_selected[0]) - 1
-X = data_set_train[:, 0:num_attributes]
-y = data_set_train[:, num_attributes]
+
+
+X = data_set_train_selected[:, 0:num_attributes]
+y = data_set_train_selected[:, num_attributes]
 clf = GaussianNB()
 clf.fit(X,y)
 hits_at_ten = list()

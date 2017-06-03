@@ -17,7 +17,7 @@ def parse(filename, header = True):
     if header:
         headers = fileToRead.next()
 
-    # iterate through rows of actual data
+    # iterate through rows of act0ual data
     for row in fileToRead:
         attr.append(row)
     for row in attr:
