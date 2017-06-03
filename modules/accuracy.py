@@ -140,7 +140,7 @@ def get_accuracy(data_set_train, data_sets_test):
         mean_square_error.append(mean_square_error_current)
 
         # Get ratio
-        #ratio_current = ratio(y, y_predicted, 3)
+        ratio_current = ratio(y, y_predicted, 3)
         #ratio.append(ratio_current)
 
     hits_at_ten_average = float(sum(hits_at_ten) / float(len(data_sets_test)))
