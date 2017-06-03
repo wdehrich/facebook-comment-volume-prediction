@@ -1,5 +1,6 @@
 import numpy as np
 import csv
+import urllib
 
 
 # read csv files
@@ -43,3 +44,39 @@ def get_urls(directory):
     url_test.append(url_prefix + "/testing/Test_Case_9.csv")
     url_test.append(url_prefix + "/testing/Test_Case_10.csv")
     return url_train, url_test
+
+
+def get_data():
+    url_prefix = "https://raw.githubusercontent.com/wdehrich/facebook-comment-volume-prediction/master/data/"
+
+    url_train = url_prefix + "training_set.csv"
+
+    urls_test = list()
+    urls_test.append(url_prefix + "testing_set_1.csv")
+    urls_test.append(url_prefix + "testing_set_2.csv")
+    urls_test.append(url_prefix + "testing_set_3.csv")
+    urls_test.append(url_prefix + "testing_set_4.csv")
+    urls_test.append(url_prefix + "testing_set_5.csv")
+    urls_test.append(url_prefix + "testing_set_6.csv")
+    urls_test.append(url_prefix + "testing_set_7.csv")
+    urls_test.append(url_prefix + "testing_set_8.csv")
+    urls_test.append(url_prefix + "testing_set_9.csv")
+    urls_test.append(url_prefix + "testing_set_10.csv")
+
+    num_url_test = len(urls_test)
+
+    # download training data file
+    raw_data = urllib.urlopen(url_train)
+    # load the CSV file as a numpy matrix
+    data_set_train = np.loadtxt(raw_data, delimiter=",", skiprows=1)
+
+    data_sets_test = list()
+    for i in range(num_url_test):
+        url_test_current = urls_test[i]
+        # download the testing data file
+        raw_data = urllib.urlopen(url_test_current)
+        # load the CSV file as a numpy matrix
+        data_set_test_current = np.loadtxt(raw_data, delimiter=",")
+        data_sets_test.append(data_set_test_current)
+
+    return data_set_train, data_sets_test
