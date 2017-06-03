@@ -1,6 +1,9 @@
 import utils as ut
 import accuracy as ac
 
-url_train, url_test = ut.get_urls("features-2")
+data_set_train, data_sets_test = ut.get_data()
 
-ac.run_get_hits_at_ten(url_train, url_test)
+columns = [30, 34, 53]
+data_set_train_selected, data_sets_test_selected = ut.select_data(data_set_train, data_sets_test, columns)
+
+ac.get_accuracy(data_set_train_selected, data_sets_test_selected)
