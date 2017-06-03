@@ -102,3 +102,34 @@ def run_get_hits_at_ten(url_train, url_test):
     plt.xlabel('Test')
     plt.title('Hits@10')
     plt.show()
+
+
+def get_accuracy(data_set_train, data_sets_test):
+    print("Executing function get_accuracy")
+    num_attributes = len(data_set_train[0]) - 1
+    print(num_attributes)
+
+    # separate the data from the target attributes
+    X = data_set_train[:, 0:(num_attributes - 1)]
+    y = data_set_train[:, num_attributes]
+
+    # Fit regression model
+    regressor = DecisionTreeRegressor(max_depth=5)
+    regressor.fit(X, y)
+    print("created tree")
+
+    hits_at_ten = list()
+    for i in range(len(data_sets_test)):
+        # Predict
+        X_test = data_sets_test[i][:, 0:(num_attributes - 1)]
+        y = data_sets_test[i][:, num_attributes]
+        y_predicted = regressor.predict(X_test)
+
+        # Get Hits@10 measurement
+        hits_at_ten_current = get_hits_at_ten(y, y_predicted)
+        hits_at_ten.append(hits_at_ten_current)
+
+    hits_at_ten_average = float(sum(hits_at_ten) / float(len(data_sets_test)))
+    print 'hits_at_ten =', hits_at_ten
+    print 'hit_at_ten_average =', hits_at_ten_average
+    return
