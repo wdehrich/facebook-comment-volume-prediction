@@ -47,16 +47,6 @@ def ratio(target, predicted, factor):
     print 'Within the factor of %d: ' % factor, len(r[(r <= factor) & (r >= 1/factor)])*1.0/len(r)
     plt.show()
 
-
-# test the functions
-def tester():
-	y_true = np.array([3.0, 1, 2, 7])
-	y_pred = np.array([4, 0.0, 2, 8])
-	ratio(y_true, y_pred)
-
-#tester()
-
-
 def run_get_hits_at_ten(url_train, url_test):
     # download training data file
     raw_data = urllib.urlopen(url_train)
