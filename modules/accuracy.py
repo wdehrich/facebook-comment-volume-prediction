@@ -39,7 +39,7 @@ def ratio(target, predicted, factor):
         a plot of predicted against target values, with ideal line
         percentage of values within the factor
     """
-    plt.plot(target,predicted,'ro')
+    plt.plot(np.array(target),np.array(predicted),'ro')
     upper = max(max(target),max(predicted)) * 1.1
     plt.plot([0, upper],[0, upper],'b-')
     predicted[predicted == 0] = 1
