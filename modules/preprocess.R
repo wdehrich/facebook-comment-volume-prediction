@@ -1,5 +1,5 @@
 # read data
-fb = read.csv('E:/Features_Variant_1.csv')
+fb = read.csv('E:/training_set.csv', header = F)
 
 # pick the best transformation
 corrs = c(rep(0,6))

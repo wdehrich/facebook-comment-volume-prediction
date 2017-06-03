@@ -1,6 +1,9 @@
 from sklearn.neural_network import MLPRegressor
+from sklearn.naive_bayes import GaussianNB
 from sklearn.preprocessing import StandardScaler 
 import numpy as np
+import accuracy as acc
+import utils
 
 # trainer of Multi-Layer Perceptron (MLP)
 
@@ -52,4 +55,12 @@ def mlp_tester():
 	print mlp
 	print mlp_test(mlp, [[1,2],[9,10],[1,2],[9,10]], [0,1,0,1], 0)
 
+def NB_tester():
+	attr, label = utils.parse('E:/Features_Variant_1.csv')
+	attr_test, target = utils.parse('E:/Features_TestSet.csv', False)
+
+	nb = GaussianNB().fit(attr[:,30].reshape(-1, 1), label)
+	print acc.get_hits_at_ten(target, nb.predict(attr_test[:,30].reshape(-1, 1)))
+
+NB_tester()
 #mlp_tester()
