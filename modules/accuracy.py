@@ -105,9 +105,8 @@ def run_get_hits_at_ten(url_train, url_test):
 
 
 def get_accuracy(data_set_train, data_sets_test):
-    print("Executing function get_accuracy")
     num_attributes = len(data_set_train[0]) - 1
-    print(num_attributes)
+    print "number of attributes = ", num_attributes
 
     # separate the data from the target attributes
     X = data_set_train[:, 0:num_attributes]
@@ -117,9 +116,15 @@ def get_accuracy(data_set_train, data_sets_test):
     # Fit regression model
     regressor = DecisionTreeRegressor(max_depth=5)
     regressor.fit(X, y)
-    print("created tree")
+
+    importances = regressor.feature_importances_
+    print("importances = ")
+    print(importances)
 
     hits_at_ten = list()
+    mean_square_error = list()
+    ratio = list()
+
     for i in range(len(data_sets_test)):
         # Predict
         X_test = data_sets_test[i][:, 0:num_attributes]
@@ -130,7 +135,18 @@ def get_accuracy(data_set_train, data_sets_test):
         hits_at_ten_current = get_hits_at_ten(y, y_predicted)
         hits_at_ten.append(hits_at_ten_current)
 
+        # Get mean squared error
+        mean_square_error_current = mse(y, y_predicted)
+        mean_square_error.append(mean_square_error_current)
+
+        # Get ratio
+        #ratio_current = ratio(y, y_predicted, 3)
+        #ratio.append(ratio_current)
+
     hits_at_ten_average = float(sum(hits_at_ten) / float(len(data_sets_test)))
+    mean_square_error_average = float(sum(mean_square_error)) / float(len(mean_square_error))
+
     print 'hits_at_ten =', hits_at_ten
     print 'hit_at_ten_average =', hits_at_ten_average
+    print 'mean_square_error_average = ', mean_square_error_average
     return
