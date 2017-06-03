@@ -80,3 +80,14 @@ def get_data():
         data_sets_test.append(data_set_test_current)
 
     return data_set_train, data_sets_test
+
+
+def select_data(data_set_train, data_sets_test, columns):
+    data_sets_test_selected = list()
+
+    for i in range(len(data_sets_test)):
+        data_sets_test_selected.append(data_sets_test[i][:, columns])
+
+    data_set_train_selected = data_set_train[:, columns]
+
+    return data_set_train_selected, data_sets_test_selected

@@ -110,7 +110,8 @@ def get_accuracy(data_set_train, data_sets_test):
     print(num_attributes)
 
     # separate the data from the target attributes
-    X = data_set_train[:, 0:(num_attributes - 1)]
+    X = data_set_train[:, 0:num_attributes]
+    #X = data_set_train[:, :-1]
     y = data_set_train[:, num_attributes]
 
     # Fit regression model
@@ -121,7 +122,7 @@ def get_accuracy(data_set_train, data_sets_test):
     hits_at_ten = list()
     for i in range(len(data_sets_test)):
         # Predict
-        X_test = data_sets_test[i][:, 0:(num_attributes - 1)]
+        X_test = data_sets_test[i][:, 0:num_attributes]
         y = data_sets_test[i][:, num_attributes]
         y_predicted = regressor.predict(X_test)
 
