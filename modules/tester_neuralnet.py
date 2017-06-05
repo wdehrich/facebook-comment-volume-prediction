@@ -5,8 +5,8 @@ import accuracy as acc
 import utils
 
 # get data
-attr, label = utils.parse('E:/Features_Variant_1.csv')
-attr_test, target = utils.parse('E:/Test_Case_all.csv', True)
+attr, label = utils.parse('E:/training_set_transformed.csv')
+attr_test, target = utils.parse('E:/Features_TestSet_transformed.csv')
 
 # train
 mlp, scaler = nn.mlp_train(attr, label)
@@ -15,7 +15,7 @@ mlp, scaler = nn.mlp_train(attr, label)
 print 'mean square error: ', acc.mse(target,mlp.predict(scaler.transform(attr_test)))
 
 # actual-perdicted ratio
-#acc.ratio(target, mlp.predict(scaler.transform(attr_test)), 2)
+print acc.ratio(target, mlp.predict(scaler.transform(attr_test)), 2)
 
 # hits@10
 hit_10 = []

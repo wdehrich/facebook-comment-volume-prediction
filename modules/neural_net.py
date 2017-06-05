@@ -9,7 +9,7 @@ import utils
 
 def mlp_train(x, y, k = 10):
 	"""
-	training a Multi-Layer Perceptron (MLP) using k-fold cross validation
+	training a Multi-Layer Perceptron (MLP)
 	- inputs:
 		x: set of features/attributes(array size: (n_samples,n_features))
 		y: target values/class labels(array size: (n_samples,))
@@ -55,12 +55,4 @@ def mlp_tester():
 	print mlp
 	print mlp_test(mlp, [[1,2],[9,10],[1,2],[9,10]], [0,1,0,1], 0)
 
-def NB_tester():
-	attr, label = utils.parse('E:/Features_Variant_1.csv')
-	attr_test, target = utils.parse('E:/Features_TestSet.csv', False)
-
-	nb = GaussianNB().fit(attr[:,30].reshape(-1, 1), label)
-	print acc.get_hits_at_ten(target, nb.predict(attr_test[:,30].reshape(-1, 1)))
-
-NB_tester()
 #mlp_tester()
